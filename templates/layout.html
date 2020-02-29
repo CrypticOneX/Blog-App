@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% if title %}
+            <title>{{ title }} - Ashutosh Blog</title>
+        {% else %}
+            <title>Ashutosh blog</title>
+        {% endif %}
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'styles/main.css') }}"
+    </head>
+    <body>
+        <header class="main-header">
+            <div class="container">
+                <div class="brand">
+                    <a href="/">
+                        <h1>My Blog</h1>
+                    </a>
+                </div>
+                <nav class="main-nav">
+                    <ul class="main-nav-lists">
+                        <li class="main-nav-list">
+                            <a href="/">Home</a>
+                        </li>
+                        <li class="main-nav-list">
+                            <a href="/about">About</a>
+                        </li>
+                        <li class="main-nav-list">
+                            <a href="/signup">Sign up</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <main class="main-container">
+            {% with messages = get_flashed_messages(with_categories = True) %}
+                {% if messages %}
+                    {% for message, category in messages %}
+                        <div class="alert alert-{{category}}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            
+            <section class="content-container">
+                {% block content %}
+                {% endblock %}
+            </section>
+            <section class="content-list">
+                <p>You can put any information here you'd like.</p>
+                <ul>
+                    <li>Latest Posts</li>
+                    <li>Announcements</li>
+                    <li>Calandars</li>
+                    <li>etc</li>
+                </ul>
+            </section>
+        </main>
+    </body>
+</html>
